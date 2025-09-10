@@ -1,6 +1,7 @@
 import HomePage from '@/pages/home';
 import LoginPage from '@/pages/login';
 import { createBrowserRouter } from 'react-router-dom'
+import PrivateRoute from './private-route';
 
 const Rotas = createBrowserRouter([
   {
@@ -9,7 +10,7 @@ const Rotas = createBrowserRouter([
   },
   {
     path: '/home',
-    element: <HomePage/>
+    element: <PrivateRoute><HomePage/></PrivateRoute>
   }
 ])
   
