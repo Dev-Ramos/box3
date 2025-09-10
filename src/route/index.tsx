@@ -1,17 +1,17 @@
-import { BrowserRouter, Route } from "react-router-dom";
-import { Routes } from "react-router-dom";
-import HomePage from "../pages/home";
-import LoginPage from "../pages/login";
+import HomePage from '@/pages/home';
+import LoginPage from '@/pages/login';
+import { createBrowserRouter } from 'react-router-dom'
 
-const Rotas = () => {
-  return (
-    <BrowserRouter >
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
+const Rotas = createBrowserRouter([
+  {
+    path: '/',
+    element: <LoginPage/>
+  },
+  {
+    path: '/home',
+    element: <HomePage/>
+  }
+])
+  
 
 export default Rotas;
