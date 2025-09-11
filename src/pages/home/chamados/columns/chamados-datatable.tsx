@@ -1,11 +1,11 @@
-"use client";
-
 import type { ColumnDef } from "@tanstack/react-table";
 import type { Chamado } from "../index";
 import { DataTable } from "@/components/data-table";
+import ButtonDetails from "@/components/button-details";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
+
 
 const columns: ColumnDef<Chamado>[] = [
   {
@@ -31,12 +31,19 @@ const columns: ColumnDef<Chamado>[] = [
     header: "Status",
     cell: ({ row: { original: chamado } }) => chamado.status.label,
   },
+  {
+    accessorKey: '',
+    header: 'Ações',
+    cell: ({ row: { original: chamado } }) => (
+      <ButtonDetails id={chamado.id} label="Detalhes"/>
+    )
+  }
 ];
 
 interface Props {
   data: Chamado[]
 }
 
-export default function DataTableChamados({data}: Props){
+export default function DataTableChamados({ data }: Props) {
   return <DataTable columns={columns} data={data ?? []}/>
 }

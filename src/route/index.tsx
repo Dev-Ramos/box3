@@ -3,6 +3,7 @@ import LoginPage from '@/pages/login';
 import { createBrowserRouter } from 'react-router-dom'
 import PrivateRoute from './private-route';
 import Chamados from '@/pages/home/chamados';
+import ChamadoDetalhes from '@/pages/home/chamados/detalhes/chamado-detalhes';
 
 const Rotas = createBrowserRouter([
   {
@@ -15,7 +16,11 @@ const Rotas = createBrowserRouter([
     children: [
       {
         path: '/home/chamados',
-        element: <Chamados/>
+        element: <Chamados />
+      },
+      {
+        path: '/home/chamados/:id',
+        element: <ChamadoDetalhes/>
       },
       {
         path: '/home/atendimentos',
