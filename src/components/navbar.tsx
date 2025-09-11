@@ -18,12 +18,15 @@ const Navbar = () => {
         <Button
           variant={"ghost"}
           className="flex items-center font-normal tracking-widest hover:bg-green-500 hover:text-white"
+          onClick={()=> navigate('/home/chamados')}
         >
           <PhoneIncomingIcon size={14} />
           Chamados
         </Button>
         <Button variant={"ghost"}
-        className="flex items-center font-normal tracking-widest hover:bg-green-500 hover:text-white">
+        className="flex items-center font-normal tracking-widest hover:bg-green-500 hover:text-white"
+        onClick={()=> navigate('/home/atendimentos')}
+        >
           <BookUserIcon size={16} />
           Atendimentos
         </Button>

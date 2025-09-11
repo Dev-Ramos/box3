@@ -1,0 +1,42 @@
+"use client";
+
+import type { ColumnDef } from "@tanstack/react-table";
+import type { Chamado } from "../index";
+import { DataTable } from "@/components/data-table";
+
+// This type is used to define the shape of our data.
+// You can use a Zod schema here if you want.
+
+const columns: ColumnDef<Chamado>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+    cell: ({ row }) => {
+      return <div>{ row.getValue('id')}</div>
+    }
+  },
+  {
+    accessorKey: "bairro",
+    header: "Bairro",
+    cell: ({ row: { original: chamado } }) => chamado.bairro,
+  },
+  {
+    accessorKey: "dataCadastro",
+    header: "Data de Cadastro",
+    cell: ({ row: { original: chamado } }) =>
+      new Date(chamado.dataCadastro).toLocaleDateString("pt-BR"),
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row: { original: chamado } }) => chamado.status.label,
+  },
+];
+
+interface Props {
+  data: Chamado[]
+}
+
+export default function DataTableChamados({data}: Props){
+  return <DataTable columns={columns} data={data ?? []}/>
+}
