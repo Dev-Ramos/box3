@@ -1,8 +1,10 @@
-import type { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef, SortingState, FilterFnOption } from "@tanstack/react-table";
 import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
+  getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -15,23 +17,47 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import React from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   pageSize: number
+  searchFields?: string[]
+  defaultSearch?: string
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   pageSize = 10,
+  searchFields = [],
+  defaultSearch = '',
 }: DataTableProps<TData, TValue>) {
+  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [globalFilter, setGlobalFilter] = React.useState(defaultSearch)
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    onGlobalFilterChange: setGlobalFilter,
+    getFilteredRowModel: getFilteredRowModel(),
+    filterFns: {
+      fuzzy: (row, _, search) => {
+        const data = row.original
+        return searchFields.some((field) => data[field].toString().includes(search) )
+      }
+    },
+    globalFilterFn: "fuzzy" as FilterFnOption<TData>,
+    state: {
+      sorting,
+      globalFilter
+    },
     initialState: {
       pagination: {
         pageSize,
@@ -41,6 +67,16 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="Digite o bairro..."
+          value={globalFilter}
+          onChange={(event) =>
+            setGlobalFilter(event.target.value)
+          }
+          className="max-w-sm"
+        />
+      </div>
       <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader>

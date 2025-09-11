@@ -1,9 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { BookUserIcon, LogOutIcon, PhoneIncomingIcon } from "lucide-react";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const handleLogOut = () => {
     localStorage.removeItem("token");
     navigate("/");
@@ -17,15 +18,22 @@ const Navbar = () => {
       <div className="flex flex-row w-1/2 justify-around space-x-4">
         <Button
           variant={"ghost"}
-          className="flex items-center font-normal tracking-widest hover:bg-green-500 hover:text-white"
-          onClick={()=> navigate('/home/chamados')}
+          className={`flex items-center font-normal tracking-widest hover:bg-green-500 hover:text-white ${
+            location.pathname.split("/").includes("chamados")
+              && "text-white font-bold"
+          }`}
+          onClick={() => navigate("/home/chamados")}
         >
           <PhoneIncomingIcon size={14} />
           Chamados
         </Button>
-        <Button variant={"ghost"}
-        className="flex items-center font-normal tracking-widest hover:bg-green-500 hover:text-white"
-        onClick={()=> navigate('/home/atendimentos')}
+        <Button
+          variant={"ghost"}
+          className={`flex items-center font-normal tracking-widest hover:bg-green-500 hover:text-white ${
+            location.pathname.split("/").includes("atendimentos")
+              && "text-white font-bold"
+          }`}
+          onClick={() => navigate("/home/atendimentos")}
         >
           <BookUserIcon size={16} />
           Atendimentos

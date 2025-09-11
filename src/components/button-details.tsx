@@ -14,7 +14,7 @@ const ButtonDetails = ({ id, label }: Prop) => {
     navigate(`/home/chamados/${id}`)
   }
   return (
-    <Button variant={'ghost'} size={'sm'} onClick={handleDetails}>
+    <Button variant={'ghost'} size={'sm'} onClick={handleDetails} className="hover:bg-neutral-300">
       {label}
       <ReceiptTextIcon size={16}/>
     </Button>
