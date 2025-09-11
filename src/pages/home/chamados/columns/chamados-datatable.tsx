@@ -6,19 +6,18 @@ import ButtonDetails from "@/components/button-details";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
-
 const columns: ColumnDef<Chamado>[] = [
   {
     accessorKey: "id",
     header: "ID",
     cell: ({ row }) => {
-      return <div>{ row.getValue('id')}</div>
-    }
+      return <div>{row.getValue("id")}</div>;
+    },
   },
   {
     accessorKey: "bairro",
     header: "Bairro",
-    cell: ({ row: { original: chamado } }) => chamado.bairro,
+    cell: ({ row: { original: chamado } }) => chamado.bairro.toUpperCase(),
   },
   {
     accessorKey: "dataCadastro",
@@ -32,18 +31,18 @@ const columns: ColumnDef<Chamado>[] = [
     cell: ({ row: { original: chamado } }) => chamado.status.label,
   },
   {
-    accessorKey: '',
-    header: 'Ações',
+    accessorKey: "",
+    header: "Ações",
     cell: ({ row: { original: chamado } }) => (
-      <ButtonDetails id={chamado.id} label="Detalhes"/>
-    )
-  }
+      <ButtonDetails id={chamado.id} label="Detalhes" />
+    ),
+  },
 ];
 
 interface Props {
-  data: Chamado[]
+  data: Chamado[];
 }
 
 export default function DataTableChamados({ data }: Props) {
-  return <DataTable columns={columns} data={data ?? []}/>
+  return <DataTable columns={columns} data={data ?? []} pageSize={11} />;
 }

@@ -1,4 +1,3 @@
-import getChamado from "@/services/get-chamado"
 import { useNavigate } from "react-router-dom"
 import { Button } from "./ui/button"
 import { ReceiptTextIcon } from "lucide-react";
@@ -11,11 +10,8 @@ type Prop = {
 
 const ButtonDetails = ({ id, label }: Prop) => {
   const navigate = useNavigate()
-  const handleDetails = async () => {
-    await getChamado(id).then((res) => {
-      console.log(res);
-      navigate(`/home/chamados/${id}`)
-    })
+  const handleDetails = () => {
+    navigate(`/home/chamados/${id}`)
   }
   return (
     <Button variant={'ghost'} size={'sm'} onClick={handleDetails}>
