@@ -2,6 +2,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import type { Chamado } from "../index";
 import { DataTable } from "@/components/data-table";
 import ButtonDetails from "@/components/button-details";
+import StatusBadge from "@/components/status-badge";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -28,7 +29,9 @@ const columns: ColumnDef<Chamado>[] = [
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row: { original: chamado } }) => chamado.status.label,
+    cell: ({ row: { original: chamado } }) => (
+      <StatusBadge value={ chamado.status.label }/>
+    )
   },
   {
     accessorKey: "",

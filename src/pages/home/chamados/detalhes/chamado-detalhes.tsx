@@ -1,4 +1,5 @@
 import FieldForm from "@/components/field-form";
+import StatusBadge from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import api from "@/services/api";
@@ -124,8 +125,8 @@ const ChamadoDetalhes = () => {
                   Detalhes do Chamado:
                 </CardTitle>
                 {/* Implementar a condicinal para decidir a cor da badge de acordo com o status: */}
-                <CardTitle className="text-sm bg-green-500 p-2 rounded-xl text-white">
-                  {call.status.label}
+                <CardTitle>
+                  <StatusBadge value={ call.status.label } />
                 </CardTitle>
               </CardHeader>
               <CardContent className=" flex justify-around gap-3 items-center flex-wrap">
