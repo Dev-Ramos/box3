@@ -5,6 +5,7 @@ import PrivateRoute from './private-route';
 import Chamados from '@/pages/home/chamados';
 import ChamadoDetalhes from '@/pages/home/chamados/detalhes/chamado-detalhes';
 import CreateCAll from '@/pages/home/chamados/criarChamad0';
+import Atendimentos from '@/pages/home/atendimentos';
 
 const Rotas = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const Rotas = createBrowserRouter([
       },
       {
         path: '/home/atendimentos',
-        element: <div>Tabela dos atendimentos em andamento aqui</div>
+        element: <Atendimentos/>
       }
     ]
   }
