@@ -77,7 +77,7 @@ const columns: ColumnDef<ChamadoType>[] = [
     accessorKey: "",
     header: " ",
     cell: ({ row: { original: chamado } }) => (
-      <ButtonDetails id={chamado.id} label="Detalhes" />
+      <ButtonDetails route={`/home/chamados/${chamado.id}`} label="Detalhes" />
     ),
   },
 ];

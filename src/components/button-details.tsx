@@ -4,14 +4,14 @@ import { ReceiptTextIcon } from "lucide-react";
 
 
 type Prop = {
-  id: number
   label: string
+  route: string
 }
 
-const ButtonDetails = ({ id, label }: Prop) => {
+const ButtonDetails = ({label, route }: Prop) => {
   const navigate = useNavigate()
   const handleDetails = () => {
-    navigate(`/home/chamados/${id}`)
+    navigate(route)
   }
   return (
     <Button variant={'ghost'} size={'sm'} onClick={handleDetails} className="hover:bg-neutral-300">

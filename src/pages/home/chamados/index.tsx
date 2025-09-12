@@ -13,7 +13,6 @@ export interface Chamado {
 }
 const Chamados = () => {
   const { chamados } = useCalls();
-  console.log(chamados);
   
   return (
     <div className="p-8">

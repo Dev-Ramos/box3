@@ -5,7 +5,6 @@ const getChamados = async () => {
     currentPage: "1",
     pageSize: "25",
   });
-  console.log(chamados.data.dados);
 
   return chamados.data.dados;
 };
