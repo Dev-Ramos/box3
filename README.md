@@ -16,9 +16,9 @@ Esse projeto ajuda na análise de ocorrências policiais, facilitando o controle
 Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-projeto.git
+git clone https://github.com/Dev-Ramos/box3.git
 
-cd seu-projeto
+cd box3
 ```
 Instale as dependências do projeto:
 ```bash

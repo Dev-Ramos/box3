@@ -2,7 +2,7 @@ import { Badge } from "./ui/badge";
 import { twMerge } from "tailwind-merge";
 
 type Props = {
-  value: string;
+  value?: string;
   className?: string
 };
 // usar tMerge para receber um w-fit na pagina de detalhes chamado

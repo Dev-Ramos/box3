@@ -29,6 +29,13 @@ export const useCalls = create<UserCallsType>((set) => ({
   chamados: [],
   atendimentos: [],
   selectBairro: [],
+  pessoaAssitida: {
+    id: 1,
+    ativo: false,
+    nome: '',
+    cpf: '',
+    dataCadastro: new Date(),
+  },
   selectPessoaAssistida: [],
   getSelectBairro: async () => {
     const res = await api.post("/Chamado/select/bairro", {
