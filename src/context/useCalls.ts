@@ -1,0 +1,43 @@
+import type { ChamadoType } from '@/pages/home/chamados/detalhes/chamado-detalhes'
+import api from '@/services/api'
+import { create } from 'zustand'
+
+type BairroSelect = {
+  id: number
+  descricao: string
+}
+type PessoaAssistidaSelect = {
+  id: number
+  descricao: string
+}
+
+interface UserCallsType {
+  error: string
+  chamados: ChamadoType[]
+  selectBairro: BairroSelect[]
+  selectPessoaAssistida: PessoaAssistidaSelect[]
+  getChamadosState: (calls: ChamadoType[]) => void
+  getSelectBairro: () => Promise<void>
+  getSelectPessoaAssistida: () => Promise<void>
+}
+
+export const useCalls = create<UserCallsType>((set) => ({
+  error: '',
+  chamados: [],
+  selectBairro: [],
+  selectPessoaAssistida: [],
+  getSelectBairro: async () => {
+    const res = await api.post('/Chamado/select/bairro', {
+      "pageSize": '10'})
+    set({ selectBairro: res.data.dados })
+  },
+  getSelectPessoaAssistida: async () => {
+    const res = await api.post('/PessoaAssistida/Select', {
+      "pageSize": '10'
+    })
+    set({ selectPessoaAssistida: res.data.dados })
+  },
+  getChamadosState: (calls: ChamadoType[]) => {
+    set({ chamados: calls})
+  }
+}))

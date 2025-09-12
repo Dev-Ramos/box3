@@ -1,16 +1,3 @@
-// const handleLogin = () => {
-//   api.put('/Auth/login', {
-//     'email': 'estagiario@box3.work',
-//     'senha': 'Estagio@Box3'
-//   }).then(res => {
-//     if (res.data.dados.token) {
-//       localStorage.setItem('token', res.data.dados.token)
-//       console.log("Token salvo: ", res.data.dados.token);
-//     }
-//   }).catch(err => {
-//     console.log("Erro ao fazer login: ", err);
-//   })
-// }
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
@@ -23,10 +10,11 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { useNavigate } from "react-router-dom";
 const formSchema = z.object({
-  email: z.email({ message: "Email inválido" }),
+  email: z.email({ message: "Email inválido" }).min(1, {message: "O email é obrigatório"}),
   senha: z
     .string()
     .min(1, { message: "A senha é obrigatória" })
@@ -84,6 +72,7 @@ const LoginPage = () => {
                   <FormControl>
                     <Input placeholder="email" {...field} />
                   </FormControl>
+                  <FormMessage/>
                 </FormItem>
               )}
             />
@@ -96,6 +85,7 @@ const LoginPage = () => {
                   <FormControl>
                     <Input placeholder="senha" type="password" {...field} />
                   </FormControl>
+                  <FormMessage/>
                 </FormItem>
               )}
             />

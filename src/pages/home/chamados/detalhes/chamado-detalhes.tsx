@@ -8,7 +8,7 @@ import { ArrowLeftIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-interface ChamadoType {
+export interface ChamadoType {
   id: number;
   status: {
     value: string;

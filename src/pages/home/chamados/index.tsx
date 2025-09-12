@@ -1,23 +1,25 @@
-import DataTableChamados from './columns/chamados-datatable'
-import { useOutletContext } from "react-router-dom";
+import { useCalls } from "@/context/useCalls";
+import DataTableChamados from "./columns/chamados-datatable";
 
 export interface Chamado {
-  id: number,
-  bairro: string,
-  dataCadastro: Date,
+  id: number;
+  bairro: string;
+  dataCadastro: Date;
   status: {
-    label: string,
-    type: string,
-    value: string
-  }
+    label: string;
+    type: string;
+    value: string;
+  };
 }
 const Chamados = () => {
-  const data = useOutletContext<Chamado[]>()
+  const { chamados } = useCalls();
+  console.log(chamados);
+  
   return (
     <div className="p-8">
-      <DataTableChamados data={data ?? []}/>
+      <DataTableChamados data={chamados ?? []} />
     </div>
-  )
-}
+  );
+};
 
-export default Chamados
+export default Chamados;

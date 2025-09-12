@@ -1,20 +1,21 @@
-import Navbar from "@/components/navbar"
-import getChamados from "@/services/get-chamados"
-import { useEffect, useState } from "react"
-import { Outlet } from "react-router-dom"
+import Navbar from "@/components/navbar";
+import { useCalls } from "@/context/useCalls";
+import getChamados from "@/services/get-chamados";
+import { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 
 const HomePage = () => {
-  const [chamados, setChamados] = useState([])
+  const { getChamadosState } = useCalls();
   useEffect(() => {
-    getChamados().then(res => setChamados(res))
-  }, [])
+    getChamados().then((res) => getChamadosState(res.dados));
+  }, []);
 
   return (
     <div>
       <Navbar />
-      <Outlet context={chamados?.dados}/> 
+      <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

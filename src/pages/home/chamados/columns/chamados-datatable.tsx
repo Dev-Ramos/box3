@@ -1,15 +1,13 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import type { Chamado } from "../index";
 import { DataTable } from "@/components/data-table";
 import ButtonDetails from "@/components/button-details";
 import StatusBadge from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, PlusCircleIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import type { ChamadoType } from "../detalhes/chamado-detalhes";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-
-const columns: ColumnDef<Chamado>[] = [
+const columns: ColumnDef<ChamadoType>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => {
@@ -85,16 +83,27 @@ const columns: ColumnDef<Chamado>[] = [
 ];
 
 interface Props {
-  data: Chamado[];
+  data: ChamadoType[];
 }
 
 export default function DataTableChamados({ data }: Props) {
+  const navigate = useNavigate();
   return (
-    <DataTable
-      columns={columns}
-      data={data ?? []}
-      pageSize={8}
-      searchFields={["id", "status", "bairro", "dataCadastro"]}
-    />
+    <>
+      <Button
+        variant={"outline"}
+        className="absolute right-8 bg-green-600 text-white font-semibold"
+        onClick={() => navigate("/home/chamados/novo")}
+      >
+        <PlusCircleIcon size={16} />
+        Criar Novo Chamado
+      </Button>
+      <DataTable
+        columns={columns}
+        data={data ?? []}
+        pageSize={8}
+        searchFields={["id", "status", "bairro", "dataCadastro"]}
+      />
+    </>
   );
 }
