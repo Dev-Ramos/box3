@@ -1,69 +1,59 @@
-# React + TypeScript + Vite
+# 📌 Box3 Monitoramento
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esse projeto ajuda na análise de ocorrências policiais, facilitando o controle e organização das viaturas e criação de relatórios semanais/mensais de ocorrências
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ⚙️ Pré-requisitos
 
-## Expanding the ESLint configuration
+- Node.js >= 24.3.1
+- npm ou yarn
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🔧 Instalação
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Clone o repositório:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/seu-usuario/seu-projeto.git
+
+cd seu-projeto
+```
+Instale as dependências do projeto:
+```bash
+npm install
+```
+## ▶️ Rodando o projeto  
+Para rodar o projeto use o comando:
+```bash
+npm run dev
+```
+Por padrão, a aplicação roda em:
+```arduino
+http://localhost:5173
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Tecnologias
+### React + Vite:
+  Escolhi usar o React + Vite devido a sua velocidade de transpilação e seu HMR (Hot Module Replacement) que modifica no virtual dom apenas os componentes que estão sendo modificados ao invés de renderizar toda a árvore.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### TypeScript: 
+  A escolha do TypeScript é essencial para criação de aplicações escaláveis, devido a sua tipagem, garantindo assim que o código esteja em completo funcionamento e evitando bugs futuro, relacionados a tipo de dados.
+
+### Axios
+  A escolha do axios está relacionado a sintaxe mais simples e ser menos verboso do que o fetch nativo, além de poder usar os interceptors que assistem as requisições enviando token, content-Type, entre outros, tornando as requisições ainda mais enxutas dentro dos componentes.
+
+### Zustand
+  O zustand é um global context menos verboso e com melhor performance do que o Context API, o que facilita a criação de contextos para aplicações
+
+### React Router DOM 
+  Como a biblioteca React nos permite a criação de SPAs o router dom se torna a esolha perfeita para roteamento da aplicação permitindo mais clareza e velociodade na criação de rotas
+
+### React Hook Form + Zod
+  Para criação de formulários essas biblioteca são únicas, pois ajuda na validação dos campos do formulário além já possuir um estado para erro que verifica, juntamente ao zod, para renderizar os erros do usuário quanto ao preenchimento do formulário
+
+### TailwindCSS + ShadCn  
+  A escolha dessas duas bibliotecas se deu devido a velocidade de produção que elas nos permite ter, o shadcn com muito compenente pré-montados e adptáveis a mudanças enquanto o tailwind nós dá velocidade de entrega em telas, pois nos permite estilizar ao mesmo tempo que criamos os componentes.
