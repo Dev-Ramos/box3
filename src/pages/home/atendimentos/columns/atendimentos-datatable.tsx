@@ -38,7 +38,8 @@ const columns: ColumnDef<Atendimento>[] = [
         </Button>
       );
     },
-    cell: ({ row: { original: atendimento } }) => new Date(atendimento.dataInicio).toLocaleDateString('pt-BR'),
+    cell: ({ row: { original: atendimento } }) =>
+      new Date(atendimento.dataInicio).toLocaleDateString("pt-BR"),
   },
   {
     accessorKey: "status",
@@ -70,9 +71,9 @@ const columns: ColumnDef<Atendimento>[] = [
         </Button>
       );
     },
-    cell: ({ row: { original: atendimento } }) =>{
+    cell: ({ row: { original: atendimento } }) => {
       return <div>{atendimento.viatura.observacao}</div>;
-    }, 
+    },
   },
   {
     accessorKey: "placa",
@@ -87,16 +88,19 @@ const columns: ColumnDef<Atendimento>[] = [
         </Button>
       );
     },
-    cell: ({ row: { original: atendimento } }) =>{
+    cell: ({ row: { original: atendimento } }) => {
       return <div>{atendimento.viatura.placa}</div>;
-    }, 
+    },
   },
-  
+
   {
     accessorKey: "",
     header: " ",
     cell: ({ row: { original: atendimento } }) => (
-      <ButtonDetails route={`/home/atendimentos/${atendimento.id}`} label="Detalhes" />
+      <ButtonDetails
+        route={`/home/atendimentos/${atendimento.id}`}
+        label="Detalhes"
+      />
     ),
   },
 ];
@@ -112,10 +116,10 @@ export default function DataTableAtendimentos({ data }: Props) {
       <Button
         variant={"outline"}
         className="absolute right-8 bg-green-600 text-white font-semibold"
-        onClick={() => navigate("/home/atendimento/novo")}
+        onClick={() => navigate("/home/atendimentos/novo")}
       >
         <PlusCircleIcon size={16} />
-        Novo Atendimento 
+        Novo Atendimento
       </Button>
       <DataTable
         columns={columns}

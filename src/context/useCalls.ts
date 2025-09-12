@@ -1,5 +1,5 @@
 import type { Atendimento } from "@/pages/home/atendimentos";
-import type { ChamadoType } from "@/pages/home/chamados/detalhes/chamado-detalhes";
+import type { ChamadoType } from "@/pages/home/chamados/detalhesCall/chamado-detalhes";
 import api from "@/services/api";
 import { create } from "zustand";
 

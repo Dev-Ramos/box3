@@ -5,7 +5,7 @@ import StatusBadge from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown, PlusCircleIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import type { ChamadoType } from "../detalhes/chamado-detalhes";
+import type { ChamadoType } from "../detalhesCall/chamado-detalhes";
 
 const columns: ColumnDef<ChamadoType>[] = [
   {
