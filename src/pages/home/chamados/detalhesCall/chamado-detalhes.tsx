@@ -57,7 +57,7 @@ const ChamadoDetalhes = () => {
       {call && (
         <div className="grid grid-cols-4 gap-2 pr-4">
           <div className="col-span-2">
-            <Card className="text-green-800">
+            <Card className="text-green-800 h-full">
               <CardHeader className="flex items-center justify-around">
                 <CardTitle className="text-center">Pessoa Assistida</CardTitle>
                 <CardTitle className="border border-neutral-400 rounded-full p-2">
@@ -119,14 +119,13 @@ const ChamadoDetalhes = () => {
             </Card>
           </div>
           <div className="col-span-2">
-            <Card className="text-green-800">
+            <Card className="text-green-800 h-full">
               <CardHeader className="flex justify-between">
                 <CardTitle className="col-span-3">
                   Detalhes do Chamado:
                 </CardTitle>
-                {/* Implementar a condicinal para decidir a cor da badge de acordo com o status: */}
                 <CardTitle>
-                  <StatusBadge value={ call.status.label } />
+                  <StatusBadge value={ call.status.label } className="w-fit"/>
                 </CardTitle>
               </CardHeader>
               <CardContent className=" flex justify-around gap-3 items-center flex-wrap">

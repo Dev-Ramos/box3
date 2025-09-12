@@ -69,7 +69,7 @@ const CreateCAll = () => {
   useEffect(() => {
     getSelectBairro();
     getSelectPessoaAssistida();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = (data: FormSchemaCall) => {
@@ -240,7 +240,7 @@ const CreateCAll = () => {
                 <Button
                   type="submit"
                   variant={"outline"}
-                  className="bg-green-700"
+                  className="bg-green-700 text-white font-semibold"
                 >
                   <PlusIcon size={16} />
                   Criar Chamado

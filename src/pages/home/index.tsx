@@ -8,7 +8,7 @@ const HomePage = () => {
   const { getChamadosState } = useCalls();
   useEffect(() => {
     getChamados().then((res) => getChamadosState(res.dados));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
