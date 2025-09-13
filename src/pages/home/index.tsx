@@ -1,6 +1,6 @@
 import Navbar from "@/components/navbar";
 import { useCalls } from "@/context/useCalls";
-import getChamados from "@/services/get-chamados";
+import {getChamados} from "@/services/feed-pages";
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 

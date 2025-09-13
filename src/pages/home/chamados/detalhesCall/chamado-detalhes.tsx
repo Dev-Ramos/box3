@@ -3,8 +3,9 @@ import LoadingData from "@/components/loading-data";
 import StatusBadge from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import api from "@/services/api";
+// import api from "@/services/api";
 import { FormatterDate } from "@/services/format-date";
+import {getChamado} from "@/services/feed-pages";
 import { ArrowLeftIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -45,11 +46,10 @@ const ChamadoDetalhes = () => {
   const chamadoId = Number(id);
 
   useEffect(() => {
-    api.get(`/Chamado/${chamadoId}`).then((res) => setCall(res.data.dados));
+    // api.get(`/Chamado/${chamadoId}`).then((res) => setCall(res.data.dados));
+    getChamado(chamadoId).then((res)=> setCall(res))
   }, [chamadoId]);
 
-  console.log(call);
-  
   return (
     <div className="flex flex-col pl-4 gap-4">
       <Button size={"icon"} variant={"ghost"} onClick={() => navigate(-1)}>
