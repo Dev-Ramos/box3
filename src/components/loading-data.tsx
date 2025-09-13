@@ -1,8 +1,12 @@
 import { SpinnerCircular } from 'spinners-react'
+import { twMerge } from 'tailwind-merge'
 
-const LoadingData = () => {
+type LoadingProp = {
+  high?: string
+}
+const LoadingData = ({high= 'h-[85vh]'}: LoadingProp) => {
   return (
-    <div className="h-[85vh] flex justify-center">
+    <div className={twMerge('flex justify-center', high)}>
       <SpinnerCircular
         size={60}
         thickness={97}
