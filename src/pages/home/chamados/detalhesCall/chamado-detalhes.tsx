@@ -1,4 +1,5 @@
 import FieldForm from "@/components/field-form";
+import LoadingData from "@/components/loading-data";
 import StatusBadge from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -54,7 +55,9 @@ const ChamadoDetalhes = () => {
       <Button size={"icon"} variant={"ghost"} onClick={() => navigate(-1)}>
         <ArrowLeftIcon size={16} />
       </Button>
-      {call && (
+      {call == null ?
+        <LoadingData/>
+        : (
         <div className="grid grid-cols-4 gap-2 pr-4">
           <div className="col-span-2">
             <Card className="text-green-800 h-full">

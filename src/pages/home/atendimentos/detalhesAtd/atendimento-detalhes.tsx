@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "@/services/api";
 import type { Atendimento } from "..";
 import type { ChamadoType } from "../../chamados/detalhesCall/chamado-detalhes";
+import LoadingData from "@/components/loading-data";
 
 export type PessoaAssistidaType = {
   id: number;
@@ -60,11 +61,13 @@ const AtendimentoDetalhes = () => {
   }
 
   return (
-    <div className="flex flex-col pl-4 gap-4">
+    <div className="flex flex-col pl-4 gap-2">
       <Button size={"icon"} variant={"ghost"} onClick={() => navigate(-1)}>
         <ArrowLeftIcon size={16} />
       </Button>
-      {call && (
+      {call == null ? (
+        <LoadingData/>
+      ) : (
         <div className="grid grid-cols-4 gap-2 pr-4">
           <div className="col-span-4">
             <Card className="text-green-800">
