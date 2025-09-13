@@ -14,7 +14,7 @@ const getChamados = async () => {
     pageSize: "25",
   });
 
-  return chamados.data.dados;
+  return chamados.data.dados.dados;
 };
 
 const getPessoa = async (pessoaAssistidaId: number) => {
@@ -33,6 +33,14 @@ const getChamadoId = async (chamadoId: number) => {
   return chamado;
 };
 
+const getAtendimentos = async() => {
+  const atendimentos = await api.post('/Atendimento/listagem', {
+    pageSize: '30'
+  }).then((res) => res.data.dados.dados)
+  
+  return atendimentos
+}
+
 const getAtendimento = async (atendimentoId: number) => {
   const atendimento = await api
     .get(`/Atendimento/${atendimentoId}`)
@@ -40,4 +48,4 @@ const getAtendimento = async (atendimentoId: number) => {
 
   return atendimento;
 };
-export { getChamado, getChamados, getAtendimento, getPessoa, getChamadoId };
+export { getChamado, getChamados, getAtendimento, getAtendimentos, getPessoa, getChamadoId };

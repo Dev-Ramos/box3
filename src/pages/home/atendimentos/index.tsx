@@ -1,5 +1,3 @@
-import api from "@/services/api";
-import { useEffect } from "react";
 import DataTableAtendimentos from "./columns/atendimentos-datatable";
 import { useCalls } from "@/context/useCalls";
 
@@ -7,6 +5,7 @@ export interface Atendimento {
   chamadoId: number
   dataCadastro: Date
   dataInicio: Date
+  dataFim: Date
   id: number
   observacao: string
   pessoaAssistidaId: number
@@ -27,16 +26,8 @@ export interface Atendimento {
 }
 
 const Atendimentos = () => {
-  const {getAtendimentoState, atendimentos} = useCalls()
-  useEffect(() => {
-    api
-    .post("/Atendimento/listagem", {
-      pageSize: "30",
-    })
-    .then((res) => getAtendimentoState(res.data.dados.dados));
-    ;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { atendimentos } = useCalls()
+  
   return (
     <div className="p-8">
       <DataTableAtendimentos data={atendimentos}/>

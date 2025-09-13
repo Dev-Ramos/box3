@@ -1,13 +1,14 @@
 import Navbar from "@/components/navbar";
 import { useCalls } from "@/context/useCalls";
-import {getChamados} from "@/services/feed-pages";
+import {getAtendimentos, getChamados} from "@/services/feed-pages";
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
 const HomePage = () => {
-  const { getChamadosState } = useCalls();
+  const { getChamadosState, getAtendimentoState } = useCalls();
   useEffect(() => {
-    getChamados().then((res) => getChamadosState(res.dados));
+    getChamados().then((res) => getChamadosState(res));
+    getAtendimentos().then((res)=> getAtendimentoState(res) )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
