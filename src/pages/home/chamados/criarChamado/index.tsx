@@ -17,12 +17,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useCalls } from "@/context/useCalls";
+import api from "@/services/api";
+import { getPessoa } from "@/services/feed-pages";
 // import api from "@/services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PlusIcon } from "lucide-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -72,21 +75,28 @@ const CreateCAll = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSubmit = (data: FormSchemaCall) => {
-    // const chamadoDTO = {
-    //   ...data,
-    //   pessoaAssistidaId: Number(data.pessoaAssistidaId),
-    //   dataCadastro: new Date().toISOString()
-    // }
-    // api.post('/Chamado', {...chamadoDTO})
-    // .then((res) => console.log(res.data))
-    console.log(data);
+  const onSubmit = async (data: FormSchemaCall) => {
+    const pessoaAssistida = await getPessoa(Number(data.pessoaAssistidaId));
+    const chamadoDTO = {
+      ...data,
+      pessoaAssistidaId: Number(data.pessoaAssistidaId),
+      dataCadastro: new Date().toISOString(),
+      pessoaAssistida,
+      latitude: "-3.6946083",
+      longitude: "-40.360736",
+    };
+    api
+      .post("/Chamado", chamadoDTO)
+      .then((res) => console.log(res.data))
+      .catch((err) => toast.error(err.response.data.mensagem, {
+        description: "Não podemos abrir um novo chamado com um pessoa que já sendo assitida"
+      }));
   };
   return (
     <div>
       <Card className="w-1/2 mx-auto mt-16">
         <CardHeader>
-          <CardTitle className="text-center text-xl">Novo Chamado:</CardTitle>
+          <CardTitle className="text-center text-xl">Preencha o chamado abaixo:</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
