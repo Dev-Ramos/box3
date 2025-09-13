@@ -95,32 +95,31 @@ const AtendimentoDetalhes = () => {
                   />
                   <div
                     className={`flex flex-col border rounded-lg p-2 mt-5 shadow-md ${
-                      atendimento?.viatura?.manuntencao == true
-                        ? "border-red-400"
-                        : "border-green-400"
+                      atendimento?.viatura?.manuntencao === false
+                      ?"border-yellow-400"
+                      : "border-green-400"
                     }`}
                   >
                     <div className="flex justify-between">
                       <span className="font-semibold">Dados da Viatura:</span>
-                      {/* Alterna entre ativo e manutenção de acordo com viatura.manutencao: */}
                       <span
                         className={`flex flex-row rounded-lg items-center gap-1 p-1 font-semibold tracking-widest text-sm ${
                           atendimento?.viatura.manuntencao === false
-                            ? "bg-green-200 text-green-800"
-                            : "bg-yellow-200 text-yellow-600"
+                            ? "bg-yellow-200 text-yellow-800"
+                            : "bg-green-200 text-green-800"
                         }`}
                       >
                         <Circle
                           size={12}
                           fill={`${
                             atendimento?.viatura.manuntencao === false
-                              ? "#016630"
-                              : "#CA8A04"
+                              ? "#CA8A04"
+                              : "#016630"
                           }`}
                         />
                         {atendimento?.viatura.manuntencao === false
-                          ? "Ativo"
-                          : "Manutenção"}
+                          ? "Manutenção"
+                          : "Ativo"}
                       </span>
                       <div className="flex space-x-2">
                         <span className="font-semibold">Placa:</span>
