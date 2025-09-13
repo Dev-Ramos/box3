@@ -13,11 +13,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import LoadingData from "@/components/loading-data";
+import { toast } from "sonner";
+
 const formSchema = z.object({
-  email: z.email({ message: "Email inválido" }).min(1, {message: "O email é obrigatório"}),
+  email: z
+    .email({ message: "Email inválido" })
+    .min(1, { message: "O email é obrigatório" }),
   senha: z
     .string()
-    .min(1, { message: "A senha é obrigatória" })
     .min(7, { message: "A sennha deve conter no mínimo 8 caracteres" }),
 });
 
@@ -31,6 +36,7 @@ interface FormSchemaType {
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [load, setLoad] = useState<boolean>(false);
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,6 +46,7 @@ const LoginPage = () => {
   });
 
   const onSubmit = async (data: FormSchemaType) => {
+    setLoad(true);
     api
       .put("/Auth/login", {
         email: data.email,
@@ -48,12 +55,20 @@ const LoginPage = () => {
       .then((response) => {
         if (response.data.dados.token) {
           localStorage.setItem("token", response.data.dados.token);
-          alert("Login realizado com sucesso!");
           navigate("/home");
+          toast.success("Login Autorizado", {
+            description: "Seja Bem-Vindo",
+            duration: 1800,
+          });
         }
       })
       .catch((error) => {
-        alert("Erro ao fazer login: "+ error);
+        console.log(error.response.data.mensagem);
+        toast.error(error.response.data.mensagem, {
+          description: "Verifique seus dados de login",
+          duration: 2000,
+        });
+        setLoad(false);
       });
   };
 
@@ -72,7 +87,7 @@ const LoginPage = () => {
                   <FormControl>
                     <Input placeholder="email" {...field} />
                   </FormControl>
-                  <FormMessage/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -85,24 +100,19 @@ const LoginPage = () => {
                   <FormControl>
                     <Input placeholder="senha" type="password" {...field} />
                   </FormControl>
-                  <FormMessage/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" variant={"outline"} className="bg-green-700">
-              Entrar
+            <Button
+              type="submit"
+              variant={"outline"}
+              className="bg-green-700 w-full tracking-widest"
+            >
+              {load ? <LoadingData high="h-full" /> : "Entrar"}
             </Button>
           </form>
         </Form>
-        {/* <div className="flex flex-col gap-2">
-          <Label htmlFor="email">Digite seu email:</Label>
-          <Input placeholder="email@gmail.com" type="email" name="email"/>
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="senha">Digite sua senha:</Label>
-          <Input placeholder="senha" type="password" name="senha"/>
-        </div>
-        <Button variant={"outline"} onClick={()=> handleLogin()} className="bg-green-600">Entrar</Button> */}
       </div>
     </div>
   );

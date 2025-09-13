@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FormatterDate } from "@/services/format-date";
 import { ArrowLeftIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "@/services/api";
 import type { Atendimento } from "..";
 import type { ChamadoType } from "../../chamados/detalhesCall/chamado-detalhes";
+import LoadingData from "@/components/loading-data";
+import { getAtendimento, getChamadoId, getPessoa } from "@/services/feed-pages";
 
 export type PessoaAssistidaType = {
   id: number;
@@ -33,38 +34,25 @@ const AtendimentoDetalhes = () => {
   const { id } = useParams<{ id: string }>();
   const atendimentoId = Number(id);
 
-  const getPessoa = async (atd: Atendimento) => {
-    await api
-      .get(`/PessoaAssistida/${atd.pessoaAssistidaId}`)
-      .then((res) => setPessoa(res.data.dados));
-  };
-
-  const getChamadoId = async (id: number) => {
-    await api.get(`/Chamado/${id}`).then((res) => setCall(res.data.dados));
-  };
-
-  const getAtendimento = async () => {
-    api
-      .get(`/Atendimento/${atendimentoId}`)
-      .then((res) => setAtd(res.data.dados));
-  };
-
-  useEffect(() => {
-    getAtendimento();
-    // eslint-disable-next-line
+  useLayoutEffect(() => {
+    getAtendimento(atendimentoId).then(res => setAtd(res))
   }, [atendimentoId]);
 
-  if (atd) {
-    getPessoa(atd);
-    getChamadoId(atd.chamadoId);
-  }
+  useEffect(() => {
+    if (atd) {
+      getPessoa(atd.pessoaAssistidaId).then(res=> setPessoa(res))
+      getChamadoId(atd.chamadoId).then(res=> setCall(res))
+    }
+  },[atd])
 
   return (
-    <div className="flex flex-col pl-4 gap-4">
+    <div className="flex flex-col pl-4 gap-2">
       <Button size={"icon"} variant={"ghost"} onClick={() => navigate(-1)}>
         <ArrowLeftIcon size={16} />
       </Button>
-      {call && (
+      {call == null ? (
+        <LoadingData/>
+      ) : (
         <div className="grid grid-cols-4 gap-2 pr-4">
           <div className="col-span-4">
             <Card className="text-green-800">
