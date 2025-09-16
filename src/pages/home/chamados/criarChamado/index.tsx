@@ -88,15 +88,20 @@ const CreateCAll = () => {
     api
       .post("/Chamado", chamadoDTO)
       .then((res) => console.log(res.data))
-      .catch((err) => toast.error(err.response.data.mensagem, {
-        description: "Não podemos abrir um novo chamado com um pessoa que já sendo assitida"
-      }));
+      .catch((err) =>
+        toast.error(err.response.data.mensagem, {
+          description:
+            "Não podemos abrir um novo chamado com um pessoa que já sendo assitida",
+        })
+      );
   };
   return (
     <div>
-      <Card className="w-1/2 mx-auto mt-16">
+      <Card className="w-full mx-auto mt-16">
         <CardHeader>
-          <CardTitle className="text-center text-xl">Preencha o chamado abaixo:</CardTitle>
+          <CardTitle className="text-center text-xl">
+            Preencha o chamado abaixo:
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
